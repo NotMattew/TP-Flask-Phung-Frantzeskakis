@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mamazone - Votre boutique en ligne</title>
+    <link rel="icon" href="/images/mamazon_tiny.png" type="image/x-icon">
     <link rel="stylesheet" href="/static/home.css">
 </head>
 <body>
     <header>
-        <h1>Mamazone</h1>
+        <img src="{{ url_for('static', filename='/images/amazon_yt.png') }}" class="logo-top" alt="logo">
         <nav>
             <ul>
                 <li><a href="#">Accueil</a></li>
@@ -21,23 +22,17 @@
     
     <main>
         <section class="produits">
+
+            {% for i in range(10) %}
             <article class="produit">
-                <img src="produit1.jpg" alt="Produit 1">
+                <img src="../images/f_thomas.jpg" alt="T">
                 <div class="produit-info">
                     <h2>Produit 1</h2>
                     <p class="prix">Prix : 20€</p>
                     <p class="description">Un super produit de qualité.</p>
                 </div>
             </article>
-            
-            <article class="produit">
-                <img src="produit2.jpg" alt="Produit 2">
-                <div class="produit-info">
-                    <h2>Produit 2</h2>
-                    <p class="prix">Prix : 30€</p>
-                    <p class="description">Ce produit est encore meilleur !</p>
-                </div>
-            </article>
+            {% endfor %}
         </section>
     </main>
     
@@ -46,3 +41,4 @@
     </footer>
 </body>
 </html>
+
