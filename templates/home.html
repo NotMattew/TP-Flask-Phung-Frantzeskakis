@@ -21,15 +21,17 @@
     </header>
     
     <main>
-        <section class="produits">
+        <section class="bbsiters">
 
-            {% for i in range(10) %}
-            <article class="produit">
-                <img src="../images/f_thomas.jpg" alt="T">
-                <div class="produit-info">
-                    <h2>Produit 1</h2>
-                    <p class="prix">Prix : 20€</p>
-                    <p class="description">Un super produit de qualité.</p>
+            {% for person in babysitter.values() %}
+            <article class="bbsiter">
+                <img src="{{ url_for('static', filename= person['pic'] ) }}" class="pdp" alt="{{ person['nom'] }}">
+                <div class="bbsiter-info">
+                    <h2>{{person['nom']}}</h2>
+                    <p class="info">{{ person['genre']}}, {{person['age']}} ans</p>
+                    <p class="quali">
+                        {% for i in range(3) %}{{person['qualite'][i]}}{% if i != 2 %}, {% endif %}{% endfor %}</p>
+                    <p class="domain">Domaine{% if person['domaine']|length > 1%}s{% endif %} : {% for i in range(person['domaine']|length) %}{{person['domaine'][i]}}{% if i != person['domaine']|length-1 %}, {% endif %}{% endfor %} </p>
                 </div>
             </article>
             {% endfor %}

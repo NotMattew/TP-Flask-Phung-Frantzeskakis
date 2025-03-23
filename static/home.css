@@ -35,7 +35,7 @@ nav ul li a {
     font-size: 18px;
 }
 
-.produits {
+.bbsiters {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -43,7 +43,7 @@ nav ul li a {
     padding: 30px;
 }
 
-.produit {
+.bbsiter {
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -54,35 +54,43 @@ nav ul li a {
     width: 800px;
 }
 
-.produit:hover {
+.bbsiter:hover {
     transform: scale(1.05);
 }
 
-.produit img {
-    max-width: 200px;
+.bbsiter img.pdp {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
     border-radius: 5px;
     margin-right: 20px;
 }
 
-.produit-info {
+.bbsiter-info {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-.produit-info h2 {
+.bbsiter-info h2 {
     margin: 0;
     font-size: 22px;
 }
 
-.produit-info p.prix {
+.bbsiter-info p.info {
     margin: 10px 0 5px 0;
     font-size: 20px;
     font-weight: bold;
     color: #333;
 }
 
-.produit-info p.description {
+.bbsiter-info p.quali {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #555;
+}
+
+.bbsiter-info p.domain {
     margin: 5px 0;
     font-size: 18px;
     color: #555;
