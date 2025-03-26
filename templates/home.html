@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mamazone - Votre boutique en ligne</title>
-    <link rel="icon" href="/images/mamazon_tiny.png" type="image/x-icon">
+    <title>Mamazone - Babysitting en ligne</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/mamazon_tiny.png') }}" type="image/png">
     <link rel="stylesheet" href="/static/home.css">
 </head>
 <body>
@@ -18,12 +18,40 @@
                 <li><a href="#">Panier</a></li>
             </ul>
         </nav>
+        
     </header>
-    
+    <div class="filtre-bar">
+            <form method="get" action="/">
+                <label for="domaine">Domaine :</label>
+                <select name="domaine" id="domaine">
+                    <option value="">Tous</option>
+                    <option value="Maisons">Maisons</option>
+                    <option value="Écoles">Écoles</option>
+                    <option value="Sorties">Sorties</option>
+                    <option value="Anniversaires">Anniversaires</option>
+                </select>
+        
+                <label for="genre">Genre :</label>
+                <select name="genre" id="genre">
+                    <option value="">Tous</option>
+                    <option value="Femme">Femme</option>
+                    <option value="Homme">Homme</option>
+                </select>
+        
+                <label for="age">Trier par âge :</label>
+                <select name="age" id="age">
+                    <option value="">--</option>
+                    <option value="asc">Croissant</option>
+                    <option value="desc">Décroissant</option>
+                </select>
+        
+                <button type="submit">Filtrer</button>
+            </form>
+        </div>
     <main>
         <section class="bbsiters">
 
-            {% for person in babysitter.values() %}
+            {% for person in babysitter %}
             <article class="bbsiter">
                 <img src="{{ url_for('static', filename= person['pic'] ) }}" class="pdp" alt="{{ person['nom'] }}">
                 <div class="bbsiter-info">

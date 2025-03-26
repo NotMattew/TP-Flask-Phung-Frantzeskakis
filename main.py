@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
 babysitter = {
@@ -71,7 +71,7 @@ babysitter = {
         "nom" : "Blanche V",
         "age" : 32,
         "genre" : "Homme",
-        "qualite" : ["Sociable", "Souriante", "Organisée"],
+        "qualite" : ["Sociable", "Souriant", "Organisé"],
         "domaine" : ["Maisons"]
     },
     "z_zoe" : {
@@ -87,9 +87,22 @@ babysitter = {
 
 @app.route("/")
 def hello():
-    return render_template(
-        "home.html", babysitter = babysitter
-    )
+    filtres = babysitter.values()
+    
+    domaine = request.args.get("domaine")
+    genre = request.args.get("genre")
+    age_order = request.args.get("age")
+
+    if domaine:
+        filtres = [b for b in filtres if domaine in b["domaine"]]
+    if genre:
+        filtres = [b for b in filtres if b["genre"] == genre]
+    if age_order == "asc":
+        filtres = sorted(filtres, key=lambda x: x["age"])
+    elif age_order == "desc":
+        filtres = sorted(filtres, key=lambda x: x["age"], reverse=True)
+
+    return render_template("home.html", babysitter=filtres)
 
 
 app.run(host='0.0.0.0', port=8000)
