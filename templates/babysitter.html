@@ -12,13 +12,15 @@
         <img src="{{ url_for('static', filename='/images/amazon_yt.png') }}" class="logo-top" alt="logo">
         <nav>
             <ul>
-                <li><a href="{{ url_for('home')}}">Accueil</a></li>
-                <li><a href="{{ url_for('contact')}}">Nous contacter</a></li>
-                <li><a href="{{ url_for('about')}}">À propos de nous</a></li>
+                <li><a href="{{ url_for('home')}}">Retour</a></li>
             </ul>
         </nav>
     </header>
     <main>
+        <p> {{personne["nom"]}} <br>
+            {{personne["age"]}} <br>
+            {{personne["genre"]}} 
+        </p>
     </main>
 
     <footer>

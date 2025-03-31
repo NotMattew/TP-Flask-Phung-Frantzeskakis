@@ -12,10 +12,9 @@
         <img src="{{ url_for('static', filename='/images/amazon_yt.png') }}" class="logo-top" alt="logo">
         <nav>
             <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Produits</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Panier</a></li>
+                <li><a href="{{ url_for('home')}}">Accueil</a></li>
+                <li><a href="{{ url_for('contact')}}">Nous contacter</a></li>
+                <li><a href="{{ url_for('about')}}">À propos de nous</a></li>
             </ul>
         </nav>
         
@@ -52,7 +51,7 @@
         <section class="bbsiters">
 
             {% for person in babysitter %}
-            <article class="bbsiter">
+            <article class="bbsiter", href = "{{ url_for('afficher', someone = person)}}">
                 <img src="{{ url_for('static', filename= person['pic'] ) }}" class="pdp" alt="{{ person['nom'] }}">
                 <div class="bbsiter-info">
                     <h2>{{person['nom']}}</h2>

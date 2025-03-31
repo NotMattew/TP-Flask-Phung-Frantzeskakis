@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request 
+
 app = Flask(__name__)
 
 babysitter = {
     "a_doriane" : {
         "pic" : "/images/a_doriane.jpg",
-        "nom" : "Dorianne A",
+        "nom" : "Doriane A",
         "age" : 21,
         "genre" : "Femme",
         "qualite" : ["Motivée", "Énergétique", "Bienveillante"],
@@ -12,7 +13,7 @@ babysitter = {
     },
     "b_aitana" : {
         "pic" : "/images/b_aitana.jpg",
-        "nom" : "Aïtana B",
+        "nom" : "Aitana B",
         "age" : 27,
         "genre" : "Femme",
         "qualite" : ["Sportive", "Motivante", "Coopérative"],
@@ -35,7 +36,7 @@ babysitter = {
         "domaine" : ["Écoles", "Sorties", "Anniversaires"]
     },
     "h_thierry" : {
-        "pic" : "/images/f_thomas.jpg",
+        "pic" : "/images/h_thierry.jpg",
         "nom" : "Thierry H",
         "age" : 47,
         "genre" : "Homme",
@@ -43,7 +44,7 @@ babysitter = {
         "domaine" : ["Écoles", "Sorties"]
     },
     "ii_elizabeth" : {
-        "pic" : "/images/f_thomas.jpg",
+        "pic" : "/images/ii_elizabeth.jpg",
         "nom" : "Elizabeth II",
         "age" : 98,
         "genre" : "Femme",
@@ -86,7 +87,7 @@ babysitter = {
 
 
 @app.route("/")
-def hello():
+def home():
     filtres = babysitter.values()
     
     domaine = request.args.get("domaine")
@@ -104,6 +105,21 @@ def hello():
 
     return render_template("home.html", babysitter=filtres)
 
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/babysitter")
+def afficher(someone):
+    return render_template("babysitter.html", personne = babysitter[someone])
+
+@app.route('/submit_form', methods=['POST'])
+def submit_form():
+    return request.form
 
 app.run(host='0.0.0.0', port=8000)
 

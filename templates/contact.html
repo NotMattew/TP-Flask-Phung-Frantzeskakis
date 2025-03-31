@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mamazone - Babysitting en ligne</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/mamazon_tiny.png') }}" type="image/png">
+    <link rel="stylesheet" href="/static/home.css">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='/images/amazon_yt.png') }}" class="logo-top" alt="logo">
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home')}}">Accueil</a></li>
+                <li><a href="{{ url_for('contact')}}">Nous contacter</a></li>
+                <li><a href="{{ url_for('about')}}">À propos de nous</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mamazone - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
