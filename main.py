@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request 
+from flask import Flask, request, redirect, url_for, render_template
 
 app = Flask(__name__)
 
 babysitter = {
     "a_doriane" : {
+        "iden" : "a_doriane",
         "pic" : "/images/a_doriane.jpg",
         "nom" : "Doriane A",
         "age" : 21,
@@ -12,6 +13,7 @@ babysitter = {
         "domaine" : ["Maisons"]
     },
     "b_aitana" : {
+        "iden" : "b_aitana",
         "pic" : "/images/b_aitana.jpg",
         "nom" : "Aitana B",
         "age" : 27,
@@ -20,6 +22,7 @@ babysitter = {
         "domaine" : ["Écoles", "Sorties"]
     },
     "c_marion" : {
+        "iden" : "c_marion",
         "pic" : "/images/c_marion.jpg",
         "nom" : "Marion C",
         "age" : 23,
@@ -28,6 +31,7 @@ babysitter = {
         "domaine" : ["Maisons"]
     },
     "f_thomas" : {
+        "iden" : "f_thomas",
         "pic" : "/images/f_thomas.jpg",
         "nom" : "Thomas F",
         "age" : 25,
@@ -36,6 +40,7 @@ babysitter = {
         "domaine" : ["Écoles", "Sorties", "Anniversaires"]
     },
     "h_thierry" : {
+        "iden" : "h_thierry",
         "pic" : "/images/h_thierry.jpg",
         "nom" : "Thierry H",
         "age" : 47,
@@ -44,6 +49,7 @@ babysitter = {
         "domaine" : ["Écoles", "Sorties"]
     },
     "ii_elizabeth" : {
+        "iden" : "ii_elizabeth",
         "pic" : "/images/ii_elizabeth.jpg",
         "nom" : "Elizabeth II",
         "age" : 98,
@@ -52,6 +58,7 @@ babysitter = {
         "domaine" : ["Maisons", "Écoles","Anniversaires", "Sorties"]
     },
     "m_julie" : {
+        "iden" : "m_julie",
         "pic" : "/images/m_julie.jpg",
         "nom" : "Julie M",
         "age" : 19,
@@ -60,6 +67,7 @@ babysitter = {
         "domaine" : ["Maisons"]
     },
     "p_brad" : {
+        "iden" : "p_brad",
         "pic" : "/images/p_brad.jpg",
         "nom" : "Brad P",
         "age" : 61,
@@ -68,6 +76,7 @@ babysitter = {
         "domaine" : ["Écoles", "Anniversaires"]
     },
     "v_blanche" : {
+        "iden" : "v_blanche",
         "pic" : "/images/v_blanche.jpg",
         "nom" : "Blanche V",
         "age" : 32,
@@ -76,6 +85,7 @@ babysitter = {
         "domaine" : ["Maisons"]
     },
     "z_zoe" : {
+        "iden" : "z_zoe",
         "pic" : "/images/z_zoe.jpg",
         "nom" : "Zoé Z",
         "age" : 31,
@@ -113,9 +123,9 @@ def contact():
 def about():
     return render_template("about.html")
 
-@app.route("/babysitter")
-def afficher(someone):
-    return render_template("babysitter.html", personne = babysitter[someone])
+@app.route("/babysitter/<choix>")
+def afficher(choix):
+    return render_template("babysitter.html", personne=babysitter[choix])
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():

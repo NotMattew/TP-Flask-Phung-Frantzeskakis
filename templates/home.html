@@ -51,16 +51,21 @@
         <section class="bbsiters">
 
             {% for person in babysitter %}
-            <article class="bbsiter", href = "{{ url_for('afficher', someone = person)}}">
-                <img src="{{ url_for('static', filename= person['pic'] ) }}" class="pdp" alt="{{ person['nom'] }}">
-                <div class="bbsiter-info">
-                    <h2>{{person['nom']}}</h2>
-                    <p class="info">{{ person['genre']}}, {{person['age']}} ans</p>
-                    <p class="quali">
-                        {% for i in range(3) %}{{person['qualite'][i]}}{% if i != 2 %}, {% endif %}{% endfor %}</p>
-                    <p class="domain">Domaine{% if person['domaine']|length > 1%}s{% endif %} : {% for i in range(person['domaine']|length) %}{{person['domaine'][i]}}{% if i != person['domaine']|length-1 %}, {% endif %}{% endfor %} </p>
-                </div>
-            </article>
+            <a href="{{ url_for('afficher', choix=person['iden']) }}" class="bbsiter-link">
+                <article class="bbsiter">
+                    <img src="{{ url_for('static', filename= person['pic']) }}" class="pdp" alt="{{ person['nom'] }}">
+                    <div class="bbsiter-info">
+                        <h2>{{person['nom']}}</h2>
+                        <p class="info">{{ person['genre']}}, {{person['age']}} ans</p>
+                        <p class="quali">
+                            {% for i in range(3) %}{{person['qualite'][i]}}{% if i != 2 %}, {% endif %}{% endfor %}
+                        </p>
+                        <p class="domain">Domaine{% if person['domaine']|length > 1%}s{% endif %} :
+                            {% for i in range(person['domaine']|length) %}{{person['domaine'][i]}}{% if i != person['domaine']|length-1 %}, {% endif %}{% endfor %}
+                        </p>
+                    </div>
+                </article>
+            </a>
             {% endfor %}
         </section>
     </main>
