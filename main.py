@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, render_template
+from flask import Flask, render_template, request, url_for
 
 app = Flask(__name__)
 
@@ -122,6 +122,10 @@ def contact():
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+@app.route("/account")
+def account():
+    return render_template("account.html")
 
 @app.route("/babysitter/<choix>")
 def afficher(choix):

@@ -3,22 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mamazone - Babysitting en ligne</title>
+    <title>{{ personne['nom'] }} - Profil Babysitter</title>
     <link rel="icon" href="{{ url_for('static', filename='images/mamazon_tiny.png') }}" type="image/png">
-    <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='babysitter.css') }}">
 </head>
 <body>
     <header>
-        <img src="{{ url_for('static', filename='/images/amazon_yt.png') }}" class="logo-top" alt="logo">
+        <img src="{{ url_for('static', filename='images/amazon_yt.png') }}" class="logo-top" alt="logo">
         <nav>
             <ul>
-                <li><a href="{{ url_for('home')}}">Retour</a></li>
+                <li><a href="{{ url_for('home') }}">← Retour</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
-        <p> {{ personne['nom'] }}
-        </p>
+        <section class="profil">
+            <img src="{{ url_for('static', filename=personne['pic']) }}" alt="{{ personne['nom'] }}">
+            <div class="details">
+                <h2>{{ personne['nom'] }}</h2>
+                <p><strong>Âge :</strong> {{ personne['age'] }} ans</p>
+                <p><strong>Genre :</strong> {{ personne['genre'] }}</p>
+                <p><strong>Qualités :</strong> {{ personne['qualite'] | join(', ') }}</p>
+                <p><strong>Domaine{{"s" if personne['domaine']|length > 1}} :</strong> {{ personne['domaine'] | join(', ') }}</p>
+            </div>
+        </section>
     </main>
 
     <footer>

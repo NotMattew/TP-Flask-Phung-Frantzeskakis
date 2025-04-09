@@ -13,6 +13,7 @@
         <nav>
             <ul>
                 <li><a href="{{ url_for('home')}}">Accueil</a></li>
+                <li><a href="{{ url_for('account')}}">Mon compte</a></li>
                 <li><a href="{{ url_for('contact')}}">Nous contacter</a></li>
                 <li><a href="{{ url_for('about')}}">À propos de nous</a></li>
             </ul>
@@ -51,7 +52,7 @@
         <section class="bbsiters">
 
             {% for person in babysitter %}
-            <a href="{{ url_for('afficher', choix=person['iden']) }}" class="bbsiter-link">
+            <a href="{{ url_for('afficher', choix=person['iden'])}}" class="bbsiter-link">
                 <article class="bbsiter">
                     <img src="{{ url_for('static', filename= person['pic']) }}" class="pdp" alt="{{ person['nom'] }}">
                     <div class="bbsiter-info">
