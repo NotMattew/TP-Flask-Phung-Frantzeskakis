@@ -1,7 +1,87 @@
-from flask import Flask, render_template, request, url_for
-
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+from datetime import datetime
 app = Flask(__name__)
+app.secret_key = "vraiment-tres-secret"  # Pour sécuriser la session
 
+# Simule une base de données simple
+users_db = {}
+
+reservations_db = []
+
+@app.route('/reserver', methods=['POST'])
+def reserver():
+    if 'user' not in session:
+        flash('Vous devez être connecté pour réserver.', 'error')
+        return redirect(url_for('account'))
+
+    # Récupérer les données du formulaire
+    date = request.form.get('date')
+    heure_debut = request.form.get('heure_debut')
+    heure_fin = request.form.get('heure_fin')
+    nombre_enfants = request.form.get('nombre_enfants')
+    domaine = request.form.get('domaine')
+
+    # Calcul du temps (en heures)
+    format_horaire = "%H:%M"
+    debut = datetime.strptime(heure_debut, format_horaire)
+    fin = datetime.strptime(heure_fin, format_horaire)
+    duree = (fin - debut).seconds // 3600  # durée en heures
+
+    if duree <= 0:
+        flash('L\'heure de fin doit être après l\'heure de début.', 'error')
+        return redirect(url_for('home'))
+
+    # Stocker la réservation
+    reservation = {
+        'user': session['user'],
+        'date': date,
+        'heure_debut': heure_debut,
+        'heure_fin': heure_fin,
+        'duree': duree,
+        'nombre_enfants': nombre_enfants,
+        'domaine': domaine
+    }
+    reservations_db.append(reservation)
+
+    flash('Réservation enregistrée avec succès !', 'success')
+    return redirect(url_for('home'))
+
+@app.route('/account', methods=['GET', 'POST'])
+def account():
+    if request.method == 'POST':
+        action = request.form.get('action')
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        if not username or not password:
+            flash('Veuillez remplir tous les champs.', 'error')
+            return redirect(url_for('account'))
+
+        if action == 'register':
+            if username in users_db:
+                flash('Ce nom d\'utilisateur existe déjà.', 'error')
+            else:
+                users_db[username] = password
+                session['user'] = username
+                flash('Compte créé avec succès.', 'success')
+                return redirect(url_for('account'))
+
+        elif action == 'login':
+            if username in users_db and users_db[username] == password:
+                session['user'] = username
+                flash('Connexion réussie.', 'success')
+                return redirect(url_for('account'))
+            else:
+                flash('Identifiants invalides.', 'error')
+
+    user = session.get('user')
+    return render_template('account.html', user=user)
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    flash('Déconnexion réussie.', 'success')
+    return redirect(url_for('account'))
 babysitter = {
     "a_doriane" : {
         "iden" : "a_doriane",
@@ -123,9 +203,6 @@ def contact():
 def about():
     return render_template("about.html")
 
-@app.route("/account")
-def account():
-    return render_template("account.html")
 
 @app.route("/babysitter/<choix>")
 def afficher(choix):

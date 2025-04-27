@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mamazone - Babysitting en ligne</title>
     <link rel="icon" href="{{ url_for('static', filename='images/mamazon_tiny.png') }}" type="image/png">
-    <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="/static/account.css">
 </head>
 <body>
     <header>
@@ -20,6 +20,34 @@
         </nav>
     </header>
     <main>
+        <div class="account-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+    
+            {% if user %}
+                <h2>Bienvenue {{ user }} !</h2>
+                <form action="{{ url_for('logout') }}" method="get">
+                    <button type="submit">Se déconnecter</button>
+                </form>
+            {% else %}
+                <h2>Connexion / Inscription</h2>
+                <form method="post" action="{{ url_for('account') }}">
+                    <label for="username">Nom d'utilisateur :</label>
+                    <input type="text" id="username" name="username" required>
+    
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" name="password" required>
+    
+                    <button type="submit" name="action" value="login">Se connecter</button>
+                    <button type="submit" name="action" value="register">Créer un compte</button>
+                </form>
+            {% endif %}
+        </div>
     </main>
 
     <footer>
