@@ -15,16 +15,18 @@ header {
 }
 
 .logo-top {
-    height: 50px;
+    width: auto;
+    height: 50px; 
 }
 
 nav ul {
     list-style: none;
+    padding: 0;
     display: flex;
     justify-content: center;
+    gap: 100px;
     background: #232f3e;
-    padding: 10px 20px;
-    margin: 0;
+    padding: 10px;
 }
 
 nav ul li a {

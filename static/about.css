@@ -15,29 +15,30 @@ header {
 }
 
 .logo-top {
-    height: 50px;
+    width: auto;
+    height: 50px; 
 }
 
 nav ul {
     list-style: none;
+    padding: 0;
     display: flex;
     justify-content: center;
+    gap: 100px;
     background: #232f3e;
-    padding: 10px 20px;
-    margin: 0;
+    padding: 10px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
     font-size: 18px;
-    padding: 0 15px;
 }
 
 main {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     padding: 40px 20px;
     min-height: calc(100vh - 160px);
 }
@@ -56,6 +57,12 @@ main {
     font-size: 32px;
     color: #131921;
     text-align: center;
+}
+
+.about-container h2 {
+    font-size: 24px;
+    color: #131921;
+    margin-top: 20px;
 }
 
 .about-container p {
@@ -82,4 +89,21 @@ footer {
     text-align: center;
     padding: 15px;
     margin-top: 30px;
+}
+
+.social-logos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;        /* Espacement entre les deux logos */
+    margin: 20px 0;   /* Marge verticale pour les séparer du contenu */
+}
+
+.social-logos img {
+    width: 40px;      /* Taille uniforme */
+    height: auto;
+    transition: transform 0.2s;
+}
+
+.social-logos img:hover {
+    transform: scale(1.1);  /* Léger effet au survol */
 }

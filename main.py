@@ -210,9 +210,6 @@ def home():
 
     return render_template("home.html", babysitter=filtres)
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
 
 @app.route("/about")
 def about():
