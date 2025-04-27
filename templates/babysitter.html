@@ -26,35 +26,36 @@
                     <p><strong>Âge :</strong> {{ personne['age'] }} ans</p>
                     <p><strong>Genre :</strong> {{ personne['genre'] }}</p>
                     <p><strong>Qualités :</strong> {{ personne['qualite'] | join(', ') }}</p>
-                    <p><strong>Domaine{{"s" if personne['domaine']|length > 1}} :</strong> {{ personne['domaine'] | join(', ') }}</p>
+                    <p><strong>Domaine{% if personne['domaine']|length > 1 %}s{% endif %} :</strong> {{ personne['domaine'] | join(', ') }}</p>
                 </div>
             </section>
-            <div class="reservation">
+
+            <section class="reservation">
                 <h3>Réserver un babysitter</h3>
                 <form action="{{ url_for('reserver') }}" method="post">
                     <label for="date">Date :</label>
                     <input type="date" id="date" name="date" required>
-            
+
                     <label for="heure_debut">Heure de début :</label>
                     <input type="time" id="heure_debut" name="heure_debut" required>
-            
+
                     <label for="heure_fin">Heure de fin :</label>
                     <input type="time" id="heure_fin" name="heure_fin" required>
-            
+
                     <label for="nombre_enfants">Nombre d'enfants :</label>
                     <input type="number" id="nombre_enfants" name="nombre_enfants" min="1" required>
-            
+
                     <label for="domaine">Domaine :</label>
                     <select id="domaine" name="domaine" required>
-                        <option value="">Choisissez une option</option>
-                        {% for domaine in personne['domaine'] %}
-                        <option value="{{ domaine }}">{{ domaine }}</option>
+                        <option value="" disabled selected>Choisissez une option</option>
+                        {% for d in personne['domaine'] %}
+                            <option value="{{ d }}">{{ d }}</option>
                         {% endfor %}
                     </select>
-            
+
                     <button type="submit">Valider la réservation</button>
                 </form>
-            </div>
+            </section>
         </div>
     </main>
 

@@ -31,9 +31,8 @@ def reserver():
         flash('L\'heure de fin doit être après l\'heure de début.', 'error')
         return redirect(url_for('home'))
 
-    # Stocker la réservation
+    # Créer un dictionnaire de réservation
     reservation = {
-        'user': session['user'],
         'date': date,
         'heure_debut': heure_debut,
         'heure_fin': heure_fin,
@@ -41,10 +40,26 @@ def reserver():
         'nombre_enfants': nombre_enfants,
         'domaine': domaine
     }
-    reservations_db.append(reservation)
+
+    # Ajouter la réservation à la session
+    if 'reservations' not in session:
+        session['reservations'] = []
+
+    session['reservations'].append(reservation)
+    session.modified = True  # Assurez-vous que la session est mise à jour
 
     flash('Réservation enregistrée avec succès !', 'success')
-    return redirect(url_for('home'))
+    return redirect(url_for('account'))
+
+
+@app.route('/annuler_reservation/<int:index>', methods=['GET'])
+def annuler_reservation(index):
+    if 'reservations' in session and len(session['reservations']) > index:
+        session['reservations'].pop(index)  # Supprimer la réservation
+        session.modified = True  # Assurez-vous que la session est mise à jour
+        flash('Réservation annulée avec succès.', 'success')
+
+    return redirect(url_for('account'))
 
 @app.route('/account', methods=['GET', 'POST'])
 def account():
