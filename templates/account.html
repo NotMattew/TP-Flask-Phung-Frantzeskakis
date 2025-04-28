@@ -39,6 +39,7 @@
                     <div class="reservations-list">
                         {% for reservation in session['reservations'] %}
                             <div class="reservation">
+                                <p><strong>Babysitter :</strong> {{ reservation['nom_babysitter'] }}</p>
                                 <p><strong>Date :</strong> {{ reservation['date'] }}</p>
                                 <p><strong>Heure de début :</strong> {{ reservation['heure_debut'] }}</p>
                                 <p><strong>Heure de fin :</strong> {{ reservation['heure_fin'] }}</p>

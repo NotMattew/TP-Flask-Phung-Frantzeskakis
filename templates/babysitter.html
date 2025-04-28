@@ -52,6 +52,8 @@
                             <option value="{{ d }}">{{ d }}</option>
                         {% endfor %}
                     </select>
+                    
+                    <input type="hidden" name="nom_babysitter" value="{{ personne['nom'] }}">
 
                     <button type="submit">Valider la réservation</button>
                 </form>

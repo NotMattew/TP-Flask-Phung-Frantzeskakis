@@ -20,6 +20,7 @@ def reserver():
     heure_fin = request.form.get('heure_fin')
     nombre_enfants = request.form.get('nombre_enfants')
     domaine = request.form.get('domaine')
+    nom_babysitter = request.form.get('nom_babysitter')
 
     # Calcul du temps (en heures)
     format_horaire = "%H:%M"
@@ -38,7 +39,8 @@ def reserver():
         'heure_fin': heure_fin,
         'duree': duree,
         'nombre_enfants': nombre_enfants,
-        'domaine': domaine
+        'domaine': domaine,
+        'nom_babysitter': nom_babysitter
     }
 
     # Ajouter la réservation à la session
